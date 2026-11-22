@@ -362,7 +362,9 @@ function run(e){
   // 만남: 결혼 14~26개월 전 중 배우자궁과 가장 잘 맞는 달
   const minM=new Date(cy,now.getMonth()+1,1);
   let mt=minM;
-  if(rel==='S'){let bs=-99;for(let k=14;k<=26;k++){const c=new Date(wy,wm-1-k,1);if(c<minM)continue;const s=monthScore(c.getMonth()+1);if(s>bs){bs=s;mt=c}}}
+  // 연애 기간: 월지·일지·시지(또는 년지)·배우자 오행으로 10~50개월 중 기준을 잡고, 그 근처에서 배우자궁과 가장 잘 맞는 달
+  const prefK=10+5*md(mBr*3+dayBr+(tBr??P.year[1])*7+spouseEl,9);
+  if(rel==='S'){let bs=-99;for(let k=Math.max(6,prefK-6);k<=prefK+6;k++){const c=new Date(wy,wm-1-k,1);if(c<minM)continue;const s=monthScore(c.getMonth()+1)-0.25*Math.abs(k-prefK);if(s>bs){bs=s;mt=c}}}
   const my=mt.getFullYear(),mm=mt.getMonth()+1;
   const md0=bestSat(my,mm),mdP=pillars(my,mm,md0,null).day;
   const meet=new Date(my,mm-1,md0);
