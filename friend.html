@@ -146,9 +146,19 @@ const $=s=>document.querySelector(s);
 const FIRST=['키 크고 반듯해서 믿음직해 보였어요','말투가 부드러워서 금방 편해졌어요','웃음소리가 커서 멀리서도 눈에 띄었어요','조용한데 눈빛이 따뜻해서 궁금했어요','말수는 적은데 묘하게 든든했어요','친근해서 처음 본 사람 같지 않았어요','첫인상이 살짝 차가워서 다가가기 어려웠어요','깔끔하고 세련돼 보였어요','시원시원하게 말 걸어 줘서 금방 친해졌어요','속을 잘 몰라서 오히려 더 궁금했어요'];
 const PLACE=['책방, 수목원, 전시회','노래방, 공연장, 루프탑 바','단골 맛집, 동네 카페, 누구네 집','방탈출 카페, 볼링장, 운동 클래스','한강, 바닷가, 심야 카페'];
 const HWA=[2,3,4,0,1],WD='일월화수목금토';
+const PLACE2=[['동네 책방','수목원','미술관 전시','식물 카페','공원 피크닉','도서관 스터디룸'],['코인노래방','콘서트장','루프탑 바','야시장','불꽃놀이 명소','셀프 사진관'],['단골 국밥집','누구네 집','동네 카페','찜질방','시장 맛집 골목','보드게임 카페'],['방탈출 카페','볼링장','클라이밍장','스터디 카페','쇼핑몰','PC방'],['한강 공원','바닷가','심야 카페','수족관','온천·스파','강변 산책로']];
+const ACT2=[['전시회 투어','독서 모임','등산·트레킹'],['노래방 투어','페스티벌 가기','인생네컷 찍기'],['맛집 도장 깨기','파자마 파티','홈쿠킹'],['방탈출','같이 운동하기','쇼핑'],['바다 여행','밤 드라이브','영화 몰아보기']];
+const DAYEL=['목요일','화요일','토요일','금요일','수요일'];
 const ACT=['전시회·책방 투어','페스티벌·노래방','맛집 탐방·밤새 수다','방탈출·같이 운동','바다 여행·밤 산책'];
 const VIBE=['같이 성장하는','같이 있으면 신나는','편하게 기대는','서로 믿고 의지하는','깊은 얘기를 나누는'];
 // 화살표(A가 B를 보는 시선): 일간 오행 관계
+const TG=['비견','겁재','식신','상관','편재','정재','편관','정관','편인','정인'];
+const VIEW10=[['동료','같은 편에 서 주는 동료 같은 친구'],['라이벌','은근히 경쟁심이 생기지만 덕분에 같이 크는 라이벌 친구'],['힐링','같이 있으면 편하게 웃게 되는 힐링 친구'],['티키타카','말이 끝없이 이어지는 티키타카 친구'],['자극','만날 때마다 새로운 걸 보여 주는 자극 친구'],['든든','오래 봐도 질리지 않는 생활 밀착 친구'],['카리스마','가끔 무섭지만 위기 땐 제일 믿음직한 친구'],['모범','본받고 싶은 반듯한 친구'],['영감','엉뚱하지만 생각을 넓혀 주는 친구'],['보호자','기대면 다 받아 주는 보호자 같은 친구']];
+const tgOf=(a,b)=>{const d=md(se(b)-se(a),5);return d*2+(a%2===b%2?0:1)};
+const MOD={'같은 지지':'생각까지 닮은','육합':'말 안 해도 통하는','삼합':'같이 있으면 힘이 나는','충':'가끔은 이해가 안 되는','원진':'가끔 서운하게 만드는','형':'농담이 아플 때가 있는','해':'혼자 맞춰 주는 느낌이 드는','파':'약속이 자꾸 엇갈리는'};
+const PAIRN=[[['쌍둥이 같은 동료','붙어 다니는 단짝'],['선의의 라이벌','경쟁하며 같이 크는 사이']],[['서로 키워 주는 사이','챙겨 주고 영감받는 사이'],['잔소리하며 아끼는 사이','선배·후배 같은 사이']],[['밀고 당기는 사이','자극 주고받는 사이'],['믿고 따르는 사이','리더와 참모 같은 사이']]];
+const pairName=(A,B)=>{const d=md(A.dm-B.dm,5),k=d===0?0:(d===1||d===4)?1:2,pol=A.P.day[0]%2===B.P.day[0]%2?0:1;const br=brRel(A.db,B.db).sort((x,y)=>Math.abs(y[1])-Math.abs(x[1]))[0]||brRel(A.P.month[1],B.P.month[1]).sort((x,y)=>Math.abs(y[1])-Math.abs(x[1]))[0];
+  const pre=br?{'육합':'천생연분 ','삼합':'찰떡 ','충':'앙숙 같은 ','원진':'애증의 ','형':'투닥투닥 ','해':'은근 서운한 ','파':'엇갈리는 ','같은 지지':'닮은꼴 '}[br[0]]:'';return pre+PAIRN[k][pol][md(A.db+B.db+A.P.month[1]+B.P.month[1],2)]};
 const VIEW={gen:['챙겨줌','손이 많이 가지만 자꾸 챙겨 주고 싶은 친구'],got:['기댐','힘들 때 제일 먼저 생각나는 든든한 친구'],ctrl:['리드','내가 끌고 가면 잘 따라와 주는 편한 친구'],ctrlby:['존경','어렵지만 배울 게 많은 친구'],same:['닮음','나랑 똑같아서 거울 보는 것 같은 친구']};
 const relOf=(x,y)=>x===y?'same':(x+1)%5===y?'gen':(y+1)%5===x?'got':(x+2)%5===y?'ctrl':'ctrlby';
 
@@ -257,7 +267,7 @@ function diagram(G,P){
     const sx=x1+ux*30+nx*off,sy=y1+uy*30+ny*off,ex=x2-ux*32+nx*off,ey=y2-uy*32+ny*off;
     s+=`<line x1="${sx}" y1="${sy}" x2="${ex}" y2="${ey}" stroke="${X.col}" stroke-width="2" marker-end="url(#ah${X.i})" opacity=".85"/>`;
     const t=G.length>=4?.2:.45,o=G.length>=4?9:12,lx=sx+(ex-sx)*t+nx*o,ly=sy+(ey-sy)*t+ny*o;
-    labels.push(`<text x="${lx}" y="${ly+4}" text-anchor="middle" font-size="${G.length>=4?11:12}" font-weight="700" fill="${X.col}" paint-order="stroke" stroke="#fff" stroke-width="4">${VIEW[relOf(X.dm,Y.dm)][0]}</text>`);
+    labels.push(`<text x="${lx}" y="${ly+4}" text-anchor="middle" font-size="${G.length>=4?11:12}" font-weight="700" fill="${X.col}" paint-order="stroke" stroke="#fff" stroke-width="4">${VIEW10[tgOf(X.P.day[0],Y.P.day[0])][0]}</text>`);
   }
   s+=labels.join('');
   s+=G.map((X,i)=>{const[x,y]=pos[i];return`<circle cx="${x}" cy="${y}" r="26" fill="#fff" stroke="${X.col}" stroke-width="3"/><text x="${x}" y="${y-2}" text-anchor="middle" font-size="13" font-weight="700" fill="${X.col}">${X.n.slice(0,4)}</text><text x="${x}" y="${y+13}" text-anchor="middle" font-size="11" fill="#5d6b86">${ST[X.P.day[0]]}${EL[X.dm]}</text>`}).join('');
@@ -305,9 +315,15 @@ function run(e){
     [makeup.t,'화해하기 좋은 날','싸운 뒤 가장 기운이 풀리는 날이에요. 먼저 연락해 보세요.'],
     [peakD.t,'우정 최고조','모두의 일지와 합이 드는 날이라 무엇을 해도 잘 맞아요'],
     [tripD.t,'같이 여행 가기 좋은 날','몇 달 안에 가장 기운이 좋은 토요일이에요']].sort((x,y)=>x[0]-y[0]);
-  let hb=7,hs=-99;for(const b of [5,6,7,8,9,10,11]){let s=0;for(const X of G){if(b===HAP(X.db))s+=3;else if(SAMHAP(b,X.db))s+=1.5;if(b===CHUNG(X.db))s-=3}if(s>hs){hs=s;hb=b}}
+  const sS=G.reduce((a,X)=>a+X.P.day[0],0),sB=G.reduce((a,X)=>a+X.db,0),sM=G.reduce((a,X)=>a+X.P.month[1],0);
+  const hrs=[5,6,7,8,9,10,11],rot=md(sB+sM,7);
+  let hb=7,hs=-99;for(let k=0;k<7;k++){const b=hrs[(k+rot)%7];let s=0;for(const X of G){if(b===HAP(X.db))s+=3;else if(SAMHAP(b,X.db))s+=1.5;if(b===CHUNG(X.db))s-=3;if(b===WON(X.db))s-=1.5;if(b===HAP(X.P.month[1]))s+=1;if(X.P.time&&b===HAP(X.P.time[1]))s+=1;if(SAMHAP(b,X.P.year[1]))s+=.5}if(s>hs){hs=s;hb=b}}
   const hh=x=>x<12?`오전 ${x}시`:x===12?'낮 12시':`오후 ${x-12}시`;
   const plEl=tot.indexOf(Math.min(...tot));
+  let hwaEl=null;for(const p of P)if(Math.abs(p.A.P.day[0]-p.B.P.day[0])===5)hwaEl=HWA[Math.min(p.A.P.day[0],p.B.P.day[0])%5];
+  const sp2=hwaEl??order[0];
+  const placeMain=PLACE2[plEl][md(sS+sM,6)],placeSp=PLACE2[sp2][md(sB+G.length,6)];
+  const acts=[...new Set([ACT2[order[0]][md(sS,3)],ACT2[order[1]][md(sB,3)],ACT2[plEl][md(sM,3)]])];
 
   // 만난 시기
   const MY=meetYears(G),top3=MY.slice(0,3),mm=meetMonth(G,top3[0].Y);
@@ -316,15 +332,17 @@ function run(e){
   const pcell=(q,k,me)=>q?`<div class="cell${me?' me':''}"><b style="color:var(${ELC[k?BREL[q[1]]:se(q[0])]})">${k?BR[q[1]]:ST[q[0]]}</b><span>${k?BRK[q[1]]+EL[BREL[q[1]]]:STK[q[0]]+EL[se(q[0])]}</span></div>`:`<div class="cell nil"><b>?</b><span>모름</span></div>`;
   const chart=X=>{const cols=[X.P.time,X.P.day,X.P.month,X.P.year];return`<div class="card"><h3 style="color:${X.col}">${X.n}</h3><div class="g4">${['시','일','월','년'].map(t=>`<div class="ph">${t}</div>`).join('')}${cols.map((q,i)=>pcell(q,0,i===1)).join('')}${cols.map((q,i)=>pcell(q,1,i===1)).join('')}</div></div>`};
   const R=72,C=2*Math.PI*R;
-  const arrowsHtml=P.flatMap(p=>[[p.A,p.B,p.care[0]],[p.B,p.A,p.care[1]]]).map(([X,Y,c])=>{const rr=relOf(X.dm,Y.dm),br=brRel(X.db,Y.db)[0];
-    return`<div class="arrow"><div class="h"><span style="color:${X.col}">${X.n}</span> → <span style="color:${Y.col}">${Y.n}</span><em>${VIEW[rr][0]}</em></div>
-    <p>${X.n}에게 ${Y.n}${jo(Y.n,'은','는')} <b>${VIEW[rr][1]}</b>${br?`이고, ${br[1]>0?'말 안 해도 통하는 사람':'가끔 이해 안 되는 사람'}이에요`:'예요'}.</p>
-    <small>첫인상: ${FIRST[Y.P.day[0]]} · ${X.n}의 ${EL[X.dm]}${jo(EL[X.dm],'과','와')} ${Y.n}의 ${EL[Y.dm]} 관계로 봤어요</small></div>`}).join('');
+  const arrowsHtml=P.flatMap(p=>[[p.A,p.B],[p.B,p.A]]).map(([X,Y])=>{const tg=tgOf(X.P.day[0],Y.P.day[0]),top=r=>r.sort((x,y)=>Math.abs(y[1])-Math.abs(x[1]))[0];
+    const lay=[['생활에서는',top(brRel(X.P.month[1],Y.db))],['속마음으로는',top(brRel(X.db,Y.db))],['겉으로는',top(brRel(X.P.year[1],Y.db))]].filter(x=>x[1]);
+    const mod=lay.length?MOD[lay[0][1][0]]:'',where=lay.length?lay[0][0]:'';
+    return`<div class="arrow"><div class="h"><span style="color:${X.col}">${X.n}</span> → <span style="color:${Y.col}">${Y.n}</span><em>${VIEW10[tg][0]}</em><em>${TG[tg]}</em></div>
+    <p>${X.n}에게 ${Y.n}${jo(Y.n,'은','는')} <b>${VIEW10[tg][1]}</b>${mod?`이고, ${where} <b>${mod}</b> 사람이에요`:'예요'}.</p>
+    <small>첫인상: ${FIRST[Y.P.day[0]]} · ${X.n}의 일간 ${ST[X.P.day[0]]} 기준으로 ${Y.n}의 일간 ${ST[Y.P.day[0]]}${jo(STK[Y.P.day[0]],'은','는')} ${TG[tg]}이에요</small></div>`}).join('');
   const careHtml=P.map(p=>{const[a,b]=p.care,more=a.v===b.v?null:a.v>b.v?p.A:p.B,mc=more===p.A?a:b;
     return`<div><div class="nm"><span style="color:${p.A.col}">${p.A.n} ${a.v}%</span><span style="color:${p.B.col}">${b.v}% ${p.B.n}</span></div>
     <div class="vs"><span class="l"><i><em style="width:${a.v}%;background:${p.A.col}"></em></i></span><span>♥</span><span class="r"><i><em style="width:${b.v}%;background:${p.B.col}"></em></i></span></div>
     <p>${more?`<b style="color:${more.col}">${more.n}</b>${jo(more.n,'이','가')} 조금 더 아껴요. ${mc.why.slice(0,2).join(', ')||'마음이 더 기울어 있어요'}.`:'둘이 똑같이 아껴요.'}</p></div>`}).join('');
-  const pairHtml=[...P].sort((a,b)=>b.sc-a.sc).map(p=>{const my=meetYears([p.A,p.B])[0];return`<details class="pair"><summary><span>${p.A.n} × ${p.B.n}</span><span>${p.sc}점</span></summary><div>
+  const pairHtml=[...P].sort((a,b)=>b.sc-a.sc).map(p=>{const my=meetYears([p.A,p.B])[0];return`<details class="pair"><summary><span>${p.A.n} × ${p.B.n}<br><small style="font-weight:500;color:var(--mute)">${pairName(p.A,p.B)}</small></span><span>${p.sc}점</span></summary><div>
     <div class="bars">${p.cats.map(c=>`<div class="bar"><div class="top"><span>${c[0]}</span><span>${c[1]}점</span></div><i><em style="width:${c[1]}%"></em></i><p>${c[2]}</p></div>`).join('')}</div>
     <dl class="kv" style="margin-top:14px">
       <dt>채워 주기</dt><dd>${p.gives.length?p.gives.join('. ')+'.':'비어 있는 오행이 비슷해서 같은 걸 함께 즐기는 사이예요.'}</dd>
@@ -339,6 +357,7 @@ function run(e){
     <div class="ring"><svg viewBox="0 0 180 180"><circle cx="90" cy="90" r="${R}" fill="none" stroke="#e3eaf7" stroke-width="14"/><circle cx="90" cy="90" r="${R}" fill="none" stroke="#2459e0" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-avg/100)}"/></svg><div><b>${avg}</b><small>${G.length>2?'평균 ':''}우정 궁합</small></div></div>
     <p class="title">${title}</p>
     <p class="lead">${names} · ${VIBE[order[0]]} ${G.length>2?'모임':'친구'}</p>
+    ${G.length===2?`<p class="note">우리는 <b>${pairName(G[0],G[1])}</b></p>`:''}
     ${G.length>2?`<p class="note">가장 잘 맞는 둘: <b>${best.A.n} × ${best.B.n}</b> (${best.sc}점)</p>`:''}
   </section>
 
@@ -347,7 +366,7 @@ function run(e){
   <section class="reveal">
     <h2 class="c">서로를 어떻게 생각할까</h2>
     <div class="map">${diagram(G,P)}</div>
-    <p class="note c">화살표는 그 사람이 상대를 바라보는 마음이에요. 일간 오행의 생극으로 봤어요.</p>
+    <p class="note c">화살표는 그 사람이 상대를 바라보는 마음이에요. 내 일간 기준으로 상대 일간이 어떤 십신(十神)인지로 봤어요.</p>
     <div class="arrows">${arrowsHtml}</div>
   </section>
 
@@ -375,9 +394,11 @@ function run(e){
   <section class="reveal">
     <h2 class="c">우리 안의 역할</h2>
     <div class="card"><dl class="kv">${roles.map(r=>`<dt>${r[0]}</dt><dd>${r[1]?`<b style="color:${r[1].col}">${r[1].n}</b> · ${r[2]}`:'다 비슷해요 · 기운이 고르게 나뉘어 있어요'}</dd>`).join('')}
-      <dt>모이는 곳</dt><dd>${PLACE[plEl]} · 다 같이 부족한 ${EL[plEl]}(${ELH[plEl]}) 기운을 채워요</dd>
-      <dt>모이는 시간</dt><dd>${BR[hb]}시 (${hh(2*hb-1)}~${hh((2*hb+1)%24||24)}) · 모두의 일지와 가장 잘 맞아요</dd>
-      <dt>같이 하면</dt><dd>${[ACT[order[0]],ACT[order[1]]].map(a=>`<span class="tag">${a}</span>`).join('')}</dd></dl></div>
+      <dt>자주 모이는 곳</dt><dd>${placeMain} · 다 같이 부족한 ${EL[plEl]}(${ELH[plEl]}) 기운을 채워요</dd>
+      <dt>특별한 날</dt><dd>${placeSp} · ${hwaEl!=null?`일간끼리 천간합해서 생기는 ${EL[sp2]}(${ELH[sp2]}) 기운의 장소예요`:`모임에서 가장 강한 ${EL[sp2]}(${ELH[sp2]}) 기운이 사는 곳이에요`}</dd>
+      <dt>모이는 요일</dt><dd>${DAYEL[plEl]} · 요일 오행 중 부족한 ${EL[plEl]} 기운의 날이에요</dd>
+      <dt>모이는 시간</dt><dd>${BR[hb]}시 (${hh(2*hb-1)}~${hh((2*hb+1)%24||24)}) · 모두의 일지·월지·시지와 가장 잘 맞아요</dd>
+      <dt>같이 하면</dt><dd>${acts.map(a=>`<span class="tag">${a}</span>`).join('')}</dd></dl></div>
   </section>
 
   <section class="reveal">
