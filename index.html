@@ -71,10 +71,24 @@ section{padding-top:56px}
 .avoid .card{padding:16px;border-color:#4a2222;background:#170d0e}
 .avoid h3{margin:0 0 8px;font-size:16px;color:var(--red)}
 .avoid p{margin:0;font-size:14px;color:#d8c6c6}
+.bad{display:grid;gap:12px}
+.bad .card{border-color:#4a2222;background:#170d0e}
+.bad h3{margin:0;font-size:19px;color:#ffb3b3}
+.bad .meta{font-size:14px;color:#c9a6a6;margin:2px 0 10px}
+.risk{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px;color:#c9a6a6}
+.risk i{height:8px;border-radius:5px;background:#2a1517;overflow:hidden}.risk em{display:block;height:100%;background:var(--red)}
+.bad ul{margin:12px 0 0;padding-left:18px;font-size:15px;color:#ead6d6}.bad li{margin-bottom:6px}
+.bad .tip{margin:10px 0 0;font-size:14px;color:#d8c6c6;border-top:1px solid #3a2023;padding-top:10px}
 .quote{font-family:"Noto Serif KR",serif;font-size:18px;color:var(--pink2)}
 .foot{font-size:13px;color:var(--mute);text-align:center;margin-top:48px}
 .again{margin-top:20px;background:none;border:1px solid var(--line);color:var(--ink);box-shadow:none}
 #result{display:none}
+.tl{list-style:none;margin:18px 0 0;padding:0 0 0 18px;border-left:2px solid var(--line)}
+.tl li{position:relative;padding:0 0 16px 4px}
+.tl li::before{content:"";position:absolute;left:-25px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--card);border:2px solid var(--pink)}
+.tl li.end::before{background:var(--pink)}
+.tl b{display:block;color:var(--pink2);font-size:14px;white-space:nowrap}
+.tl span{font-size:15px}
 .map{background:#0f0c11;border:1px solid var(--line);border-radius:16px;margin-top:16px;padding:6px}
 .map svg{display:block;width:100%;height:auto}
 .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
@@ -197,12 +211,20 @@ const STEMP=[
 ['큰 강물 같은','포용력이 크고 대화가 끊이지 않는 사람','여유롭고 시원시원함','"여기 노을 진짜 예쁘죠."'],
 ['봄비 같은','생각이 깊고 공감을 잘하는, 볼수록 궁금한 사람','눈빛이 깊고 신비로움','"이 노래, 저도 좋아하는데요."']];
 const BODY=[['아담하고 날렵한',-2],['단단하고 다부진',0],['키가 크고 시원시원한',5],['가늘고 길쭉한',3],['어깨가 넓고 듬직한',3],['균형 잡힌 탄탄한',1],['활동적이고 건강한',2],['부드럽고 포근한',-1],['슬림하고 탄탄한',2],['아담하고 반듯한',-1],['골격이 크고 든든한',4],['유연하고 부드러운',0]];
-const JOB=[['교육·출판','콘텐츠 기획·방송작가','조경·건축 설계','의료·제약','상담·심리'],
-['광고·브랜딩','방송·공연','외식·창업','디자인·패션','마케팅·홍보'],
-['공공기관·행정','부동산·인테리어','공무원·HR','회계·세무','물류·유통'],
-['법조·노무','전기·전자 엔지니어','금융·증권','반도체·기계','IT 보안·데이터'],
-['연구원·학계','게임·IT 서비스','무역·해운','개발자·소프트웨어','여행·항공']];
+const JOB=[['초중고 교사','출판 편집자','건축 설계사','약사','상담심리사','사회복지사','조경 디자이너','교육 스타트업 기획자','한의사','NGO 활동가'],
+['광고 기획자','방송 PD','공연 기획자','패션 디자이너','브랜드 마케터','셰프','크리에이터','사진작가','UX 디자이너','항공 승무원'],
+['공무원','부동산 디벨로퍼','인사(HR) 담당자','회계사','물류 매니저','인테리어 디자이너','호텔리어','식품 연구원','건설 현장 관리자','은행원'],
+['반도체 엔지니어','변호사','증권사 애널리스트','기계 설계 엔지니어','외과 의사','정보보안 전문가','경찰관','치과의사','자동차 엔지니어','공인노무사'],
+['소프트웨어 개발자','대학 연구원','무역회사 직원','데이터 사이언티스트','게임 기획자','여행 플래너','해운·항만 관리자','번역가','작곡가','카페 사장']];
+const WSTYLE=['꾸준히 커리어를 쌓는 성장형','사람 앞에 서는 표현형','한 조직에 오래 있는 안정형','실력과 자격으로 승부하는 전문가형','프로젝트 단위로 움직이는 자유형'];
 const DRINK=['거의 안 마심','분위기만 즐기는 정도','가볍게 즐기는 정도','술자리를 좋아하는 편','소문난 주당'];
+const ACT=['서점·전시회 데이트','공연·페스티벌 가기','단골 맛집 탐방','방탈출·보드게임','한강·바닷가 산책'];
+const TRIP=[[['강원 평창','숲길 걷고 밤에 별 보기'],['가평','수목원 산책하고 캠핑하기']],[['여수','밤바다 야경과 포차 투어'],['부산 광안리','불꽃 같은 야경 보며 걷기']],[['경주','한옥 숙소에서 느긋하게 쉬기'],['전주','한옥마을 골목과 맛집 돌기']],[['부산 해운대','호캉스하고 맛집 돌기'],['인천 영종도','바다 보이는 호텔에서 쉬기']],[['제주','바다 따라 드라이브'],['강릉','바다 보며 카페 투어']]];
+const FIGHT=['서로 자기 방식을 고집할 때','말이 감정보다 먼저 나갈 때','관계가 변화 없이 지루해질 때','말투가 날카로워질 때','속마음을 말하지 않을 때'];
+const MAKEUP=['같이 걸으면서 이야기하기','맛있는 걸 먹으면서 풀기','집에서 같이 쉬면서 시간 보내기','편지나 정리된 말로 마음 전하기','하루 시간을 두고 차분히 대화하기'];
+const HAE=b=>(19-b)%12, PA=b=>[9,4,11,6,1,8,3,10,5,0,7,2][b];
+const HYUNG=(a,b)=>{const g=[[2,5,8],[1,10,7]];if(a===b)return[4,6,9,11].includes(a);if((a===0&&b===3)||(a===3&&b===0))return true;return g.some(x=>x.includes(a)&&x.includes(b))};
+const BADT=['자기 고집이 강하고 양보가 없는','감정 기복이 크고 말이 앞서는','변화를 싫어하고 고집스러운','말이 날카롭고 지적이 잦은','속을 잘 안 보여 주는'];
 const DDI=['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
 const KILLT=['고집이 세고 자기 방식만 밀어붙이는','감정 기복이 크고 즉흥적인','변화를 싫어하고 고집스러운','날카롭고 지적이 잦은','속을 알 수 없고 우유부단한'];
 const KILLC=['서로 고집을 부리기 쉬워요. 결론보다 상대 이야기를 먼저 들어 주세요.','말이 앞서기 쉬워요. 감정이 올라오면 하루 미뤘다가 이야기하세요.','관계가 지루해지기 쉬워요. 새로운 데이트를 계획해 보세요.','말이 날카로워지기 쉬워요. 지적 대신 부탁으로 말해 보세요.','속마음을 숨기기 쉬워요. 먼저 솔직하게 털어놓으세요.'];
@@ -309,14 +331,16 @@ function run(e){
   const total=cnt.reduce((a,b)=>a+b,0);
 
   // 일진 점수: 배우자궁과 합 +3, 배우자 오행 천간 +2 / 지지 +1, 충 -3, 원진 -2
-  const dayScore=(Y,M,D)=>{const q=pillars(Y,M,D,null).day;let s=0;if(q[1]===HAP(dayBr))s+=3;if(se(q[0])===spouseEl)s+=2;if(BREL[q[1]]===spouseEl)s+=1;if(q[1]===CHUNG(dayBr))s-=3;if(q[1]===WON(dayBr))s-=2;return s};
+  const mBr=P.month[1],tBr=P.time?P.time[1]:null;
+  const side=b=>(b===HAP(mBr)?1:0)+(tBr!=null&&b===HAP(tBr)?1:0)-(b===CHUNG(mBr)?1:0)-(tBr!=null&&b===CHUNG(tBr)?1:0);
+  const dayScore=(Y,M,D)=>{const q=pillars(Y,M,D,null).day;let s=0;if(q[1]===HAP(dayBr))s+=3;if(se(q[0])===spouseEl)s+=2;if(BREL[q[1]]===spouseEl)s+=1;if(q[1]===CHUNG(dayBr))s-=3;if(q[1]===WON(dayBr))s-=2;if(se(q[0])===se(P.month[0]))s+=.5;return s+side(q[1])};
   const bestSat=(Y,M)=>{let bd=0,bs=-99;for(const D of sats(Y,M)){const s=dayScore(Y,M,D);if(s>bs){bs=s;bd=D}}return bd};
-  const monthScore=M=>{const b=M%12;let s=0;if(b===HAP(dayBr))s+=3;if(BREL[b]===spouseEl)s+=2;if(SAMHAP(b,dayBr))s+=1;if(b===CHUNG(dayBr))s-=3;if(b===WON(dayBr))s-=2;return s};
+  const monthScore=M=>{const b=M%12;let s=0;if(b===HAP(dayBr))s+=3;if(BREL[b]===spouseEl)s+=2;if(SAMHAP(b,dayBr))s+=1;if(b===CHUNG(dayBr))s-=3;if(b===WON(dayBr))s-=2;return s+side(b)*1.5};
 
   // 결혼운 흐름
   const now=new Date(),cy=now.getFullYear();
   const startAge={S:27,D:26,M:0}[rel];
-  const y0=Math.max(cy,y+startAge);
+  const y0=Math.max(cy+{S:2,D:1,M:0}[rel],y+startAge);
   const years=[...Array(6)].map((_,i)=>y0+i);
   const scores=years.map(Y=>{
     const s=md(Y-4,10),b=md(Y-4,12);let v=44;
@@ -324,6 +348,7 @@ function run(e){
     if(b===HAP(dayBr))v+=18; else if(SAMHAP(b,dayBr))v+=8;
     if(b===CHUNG(dayBr))v-=14; if(b===WON(dayBr))v-=8;
     if(se(s)===killEl)v-=6;
+    v+=side(b)*7; if(tBr!=null&&SAMHAP(b,tBr))v+=3; if(se(s)===se(P.month[0]))v+=4;
     const age=Y-y; if(rel!=='M'){if(age>=29&&age<=33)v+=8;else if(age>36)v-=(age-36)*2}
     return Math.max(12,Math.min(96,Math.round(v)));
   });
@@ -334,33 +359,38 @@ function run(e){
     if(s>best){best=s;wm=M}}
   const wd=bestSat(wy,wm),wdP=pillars(wy,wm,wd,null).day;
 
-  // 만남: 결혼 10~18개월 전 중 배우자궁과 가장 잘 맞는 달
+  // 만남: 결혼 14~26개월 전 중 배우자궁과 가장 잘 맞는 달
   const minM=new Date(cy,now.getMonth()+1,1);
   let mt=minM;
-  if(rel==='S'){let bs=-99;for(let k=10;k<=18;k++){const c=new Date(wy,wm-1-k,1);if(c<minM)continue;const s=monthScore(c.getMonth()+1);if(s>bs){bs=s;mt=c}}}
+  if(rel==='S'){let bs=-99;for(let k=14;k<=26;k++){const c=new Date(wy,wm-1-k,1);if(c<minM)continue;const s=monthScore(c.getMonth()+1);if(s>bs){bs=s;mt=c}}}
   const my=mt.getFullYear(),mm=mt.getMonth()+1;
   const md0=bestSat(my,mm),mdP=pillars(my,mm,md0,null).day;
   const meet=new Date(my,mm-1,md0);
   const dday=Math.ceil((meet-new Date(cy,now.getMonth(),now.getDate()))/864e5);
-  let hb=7,hs=-99;for(const b of [7,6,8,5,9,10]){let s=0;if(b===HAP(dayBr))s+=3;if(BREL[b]===spouseEl)s+=2;if(SAMHAP(b,dayBr))s+=1;if(b===CHUNG(dayBr))s-=3;if(b===WON(dayBr))s-=2;if(s>hs){hs=s;hb=b}}
+  let hb=7,hs=-99;for(const b of [7,6,8,5,9,10]){let s=side(b)*1.5;if(b===HAP(dayBr))s+=3;if(BREL[b]===spouseEl)s+=2;if(SAMHAP(b,dayBr))s+=1;if(b===CHUNG(dayBr))s-=3;if(b===WON(dayBr))s-=2;if(s>hs){hs=s;hb=b}}
   const hh=x=>x<12?`오전 ${x}시`:x===12?'낮 12시':`오후 ${x-12}시`;
   const mh=`${BR[hb]}시(${hh(2*hb-1)}~${hh(2*hb+1)})`;
 
   // 배우자
-  const pol=P.day[0]%2,sStem=spouseEl*2+(1-pol);
+  const pol=P.day[0]%2,jung=P.month[0]%2===pol,sStem=spouseEl*2+(jung?1-pol:pol);
+  const placeEl=P.time?se(P.time[0]):se(P.month[0]),moEl=se(P.month[0]);
   const pr=PERS[spouseEl];
   const sp=STEMP[sStem];
   const strong=cnt.indexOf(Math.max(...cnt));
-  const mb=[sStem%2===0?'E':'I',[0,1,4].includes(spouseEl)?'N':'S',[3,4].includes(BREL[dayBr])?'T':'F',cnt[2]+cnt[3]>=3?'J':'P'];
+  const eScore=(sStem%2===0?1:0)+(P.month[0]%2===0?1:0)+(P.time?(P.time[0]%2===0?1:0):.5);
+  const mb=[eScore>=1.5?'E':'I',[0,1,4].includes(spouseEl)?'N':'S',[3,4].includes(BREL[dayBr])!==(BREL[mBr]===1)?'T':'F',cnt[2]+cnt[3]+(tBr!=null&&[1,4,7,10].includes(tBr)?1:0)>=4?'J':'P'];
   const ds=cnt[4]-1+([0,11].includes(dayBr)?1:0)+(spouseEl===4||spouseEl===1?1:0)-(spouseEl===2?1:0);const drinkLv=ds<=0?0:ds===1?1:ds===2?2:ds<=4?3:4;
   const gapFor=bs=>{let g=null;for(const t of [0,1,-1,2,-2,3,-3,4,-4,5,-5,6,7,8]){if(md(sy-t-4,12)===bs){g=t;break}}return g};
   const gapStr=g=>g===0?'동갑':g>0?`${g}살 연상`:`${-g}살 연하`;
-  const cands=[HAP(P.year[1]),(P.year[1]+4)%12,(P.year[1]+8)%12].map(b=>[b,gapFor(b)]).filter(c=>c[1]!==null);
-  cands.sort((a,b)=>Math.abs(a[1])-Math.abs(b[1])||b[1]-a[1]);
+  const pref=[-1,0,1,2,3,4,2,1,0,3][P.month[0]]+(tBr!=null?[0,1,-1,0,1,2,0,-1,1,0,2,1][tBr]:0);
+  const bScore=b=>{let s=0;if(b===HAP(dayBr))s+=3;if(b===HAP(P.year[1]))s+=2;if(b===HAP(mBr))s+=1.5;if(tBr!=null&&b===HAP(tBr))s+=1.5;[dayBr,P.year[1],mBr,tBr].forEach(x=>{if(x!=null&&SAMHAP(b,x))s+=.8});if(b===CHUNG(dayBr))s-=3;if(b===WON(dayBr))s-=2;if(b===CHUNG(P.year[1]))s-=1;return s};
+  const gapAll=b=>{const ts=[];for(let t=-4;t<=7;t++)if(md(sy-t-4,12)===b)ts.push(t);return ts};
+  const cands=[];for(let b=0;b<12;b++)for(const t of gapAll(b))cands.push([b,t,bScore(b)-0.35*Math.abs(t-pref)]);
+  cands.sort((a,b)=>b[2]-a[2]);
   const [pb,gap]=cands[0];
   const gapTxt=`${gapStr(gap)} · ${DDI[pb]}띠`;
-  const ht=(px==='M'?174:161)+BODY[dayBr][1]+(spouseEl===0?2:0);
-  const c5=v=>Math.min(5,v);const STAR=[c5(3+(sStem%2)+(cnt[0]+cnt[1]>=3?1:0)),c5(3+([2,3].includes(spouseEl)?1:0)+(cnt[2]>=2?1:0)),c5(3+([1,4].includes(spouseEl)?1:0)+(cnt[1]+cnt[4]>=3?1:0))];let si=0;
+  const ht=(px==='M'?174:161)+BODY[dayBr][1]+(spouseEl===0?2:0)+[1,0,0,-1,1][moEl]+(tBr!=null?[0,-1,1,1,0,0,1,-1,0,-1,1,0][tBr]:0);
+  const c5=v=>Math.min(5,v);const STAR=[c5(2+(sStem%2)+(cnt[0]+cnt[1]>=3?1:0)+(moEl===0||moEl===1?1:0)),c5(2+([2,3].includes(spouseEl)?1:0)+(cnt[2]>=2?1:0)+(jung?1:0)),c5(2+([1,4].includes(spouseEl)?1:0)+(cnt[1]+cnt[4]>=3?1:0)+(placeEl===1||placeEl===4?1:0))];let si=0;
   const st=()=>{const n=STAR[si++];return'★'.repeat(n)+'☆'.repeat(5-n)};
   const inChart=[P.time,P.month,P.year].filter(Boolean).map(q=>q[1]);
   const match=Math.min(99,80+5*Math.min(cnt[spouseEl],2)+(inChart.includes(HAP(dayBr))?5:0)+(inChart.includes(CHUNG(dayBr))?0:4));
@@ -374,10 +404,39 @@ function run(e){
   let cal='월화수목금토일'.split('').map(x=>`<div class="h">${x}</div>`).join('')+'<div></div>'.repeat(lead);
   for(let i=1;i<=nd;i++){let c='d';if(i===md0)c+=' hit';else if(i>=md0-6&&i<md0-2)c+=' soft';else if(i>md0&&i<=md0+5)c+=' good';cal+=`<div class="${c}">${i}</div>`}
 
+  // 연애 이야기
+  const fmt=dt=>`${dt.getFullYear()}.${dt.getMonth()+1}.${dt.getDate()}`;
+  const addM=(Y,M,k)=>new Date(Y,M-1+k,1);
+  const bestIn=(a,b,satOnly)=>{let bd=null,bs=-99;for(let t=new Date(a);t<=b;t.setDate(t.getDate()+1)){if(satOnly&&t.getDay()!==6)continue;const s=dayScore(t.getFullYear(),t.getMonth()+1,t.getDate());if(s>bs){bs=s;bd=new Date(t)}}return bd};
+  const bestMonth=(a,b)=>{let bm=a,bs=-99;for(let t=new Date(a);t<=b;t=addM(t.getFullYear(),t.getMonth()+1,1)){const s=monthScore(t.getMonth()+1);if(s>bs){bs=s;bm=new Date(t)}}return bm};
+  const monthEnd=t=>new Date(t.getFullYear(),t.getMonth()+1,0);
+  const wedding=new Date(wy,wm-1,wd);
+  const tripIn=(a,b)=>{if(a>b)return null;const t=bestMonth(a,b);return bestIn(t,monthEnd(t),true)};
+  const sg0=addM(wy,wm,-3),sang=bestIn(sg0,monthEnd(sg0),true);
+  let tl=[];
+  if(rel==='S'){
+    const d1=bestIn(new Date(my,mm-1,md0+7),new Date(my,mm-1,md0+28),true);
+    const conf=bestIn(new Date(d1.getFullYear(),d1.getMonth(),d1.getDate()+7),new Date(d1.getFullYear(),d1.getMonth(),d1.getDate()+40),false);
+    const trip=tripIn(addM(conf.getFullYear(),conf.getMonth()+1,2),addM(wy,wm,-5));
+    tl=[[meet,'처음 만나는 날'],[d1,'첫 데이트'],[conf,'사귀기 시작하는 날'],[trip,`첫 여행 · ${TRIP[spouseEl][P.month[1]%2][0]}`],[sang,'상견례'],[wedding,'결혼식']];
+  }else if(rel==='D'){
+    const trip=tripIn(addM(my,mm,1),new Date(Math.min(addM(my,mm,12),addM(wy,wm,-5))));
+    tl=[[meet,'다음 특별한 데이트'],[trip,`함께 여행 · ${TRIP[spouseEl][P.month[1]%2][0]}`],[sang,'상견례'],[wedding,'결혼식']];
+  }else{
+    const trip=tripIn(addM(my,mm,1),addM(my,mm,12));
+    tl=[[meet,'둘만의 날'],[trip,`부부 여행 · ${TRIP[spouseEl][P.month[1]%2][0]}`]];
+  }
+  tl=tl.filter(x=>x[0]).sort((a,b)=>a[0]-b[0]);
+  const monthsBetween=(a,b)=>(b.getFullYear()-a.getFullYear())*12+b.getMonth()-a.getMonth();
+  const period=rel==='S'?`${monthsBetween(meet,wedding)}개월 (만나서 결혼까지)`:rel==='D'?`지금부터 결혼까지 약 ${monthsBetween(now,wedding)}개월`:'';
+  const course=[...new Set([ACT[spouseEl],ACT[moEl],ACT[placeEl],ACT[strong],ACT[(spouseEl+1)%5]])].slice(0,3);
+  const relTxt=(sx==='F'?'그 사람이 자연스럽게 리드하고, 나는 편하게 기대는 관계':'내가 먼저 챙기고 이끌어 가는 관계')+(jung?'. 음양이 반대라 서로 부족한 걸 채워 줘요.':'. 음양이 같아 말이 잘 통하고 친구 같은 사이예요.');
+  const ddiTxt=pb===HAP(P.year[1])?`${DDI[pb]}띠와는 육합이라 집안끼리도 잘 맞아요.`:`${DDI[pb]}띠와는 삼합이라 친구처럼 편한 사이예요.`;
+  const contact=(sStem%2===0?'전화로 목소리 듣는 걸 좋아함':'카톡을 자주, 길게 보내는 편')+(cnt[1]>=2?' · 답장이 빠름':' · 답장은 느려도 꼼꼼함');
   const T={
     S:{h2:'결혼운은 언제 열릴까?',big:`${wy}년 ${wm}월 ${wd}일`,lead:`만 ${wy-y}살 무렵의 토요일, 결혼운이 가장 높은 해의 길한 달이에요`,peak:'결혼운 최고',end:'그 전까진 타이밍이 아니었을 뿐이에요.',
        h3:'그 사람은 어떤 사람일까?',h3s:'',h4:'인연이 오는 날',h4s:'그 사람은 언제 나타날까?',lg:['기운이 돌기 시작','만남운 최고','약속 잡기 좋은 날'],k1:'만나는 곳',k3:'첫마디',line:sp[3],
-       h5:'단, 피해야 할<br>사람들도 있어요',l5:`${EL[killEl]}(${ELH[killEl]}) 기운이 강한 사람, 특히 ${KILLT[killEl]} 사람은 ${name}님의 배우자 기운을 눌러요`},
+       h5:'단, 피해야 할<br>사람들도 있어요',l5:`${EL[killEl]}(${ELH[killEl]}) 기운이 강한 사람, 특히 ${KILLT[killEl]} 사람은 ${name}님의 배우자 기운을 눌러요. 아래는 내 사주의 년·월·일·시 기둥과 충·원진·형·해·파로 부딪히는 띠예요`},
     D:{h2:'지금 인연과 결혼한다면?',big:`${wy}년 ${wm}월 ${wd}일`,lead:`만 ${wy-y}살 무렵, 지금 관계가 이어진다면 이날이 가장 좋아요`,peak:'결혼운 최고',end:'지금 만나는 사람과 이 흐름을 같이 타 보세요.',
        h3:'사주 속 인연의 모습',h3s:'지금 그 사람과 얼마나 닮았는지 비교해 보세요',h4:'관계가 한 걸음 나아가는 날',h4s:'고백, 기념일, 중요한 대화를 하기 좋은 때',lg:['마음이 무르익는 때','애정운 최고','데이트하기 좋은 날'],k1:'추천 데이트',k3:'그날 꺼낼 말',line:'"우리 다음엔 어디 갈까? 내년 얘기도 해 보자."',
        h5:'단, 조심해야 할<br>순간도 있어요',l5:`${EL[killEl]}(${ELH[killEl]}) 기운이 강해지는 시기엔 관계가 예민해지기 쉬워요`},
@@ -387,11 +446,28 @@ function run(e){
   }[rel];
   const EM=[[2,3],[5,6],[1,4,7,10],[8,9],[11,12]];
   const cm=cb===0?12:cb;
-  const warn=rel==='S'
-    ?[[`${DDI[cb]}띠 · ${gapStr(cg)}`,'부딪히는 인연',`배우자궁 ${BR[dayBr]}${jo(BRK[dayBr],'과','와')} 충(沖)하는 ${BR[cb]}. 처음엔 강하게 끌리지만 생활 리듬이 자꾸 엇갈려요.`],
-      [`${DDI[wb]}띠 · ${gapStr(wg)}`,'서운함이 쌓이는 인연',`${BR[dayBr]}${jo(BRK[dayBr],'과','와')} 원진(怨嗔)인 ${BR[wb]}. 이유 없이 서운함이 쌓이고 오해가 길어지기 쉬워요.`]]
-    :[[`${cm}월`,'배우자궁이 흔들리는 달',`배우자궁 ${BR[dayBr]}${jo(BRK[dayBr],'과','와')} 충하는 ${BR[cb]}월이에요. 큰 결정이나 무거운 대화는 이 달을 피하세요.`],
+  const warn=[[`${cm}월`,'배우자궁이 흔들리는 달',`배우자궁 ${BR[dayBr]}${jo(BRK[dayBr],'과','와')} 충하는 ${BR[cb]}월이에요. 큰 결정이나 무거운 대화는 이 달을 피하세요.`],
       [`${EM[killEl].join('·')}월`,`${EL[killEl]} 기운이 강해지는 달`,KILLC[killEl]]];
+  // 만나면 안 되는 띠: 내 네 기둥과의 충·원진·형·해·파 + 배우자 기운을 누르는 오행
+  const yb=P.year[1],wa=(x,a,b)=>`${BR[x]}${jo(BRK[x],a,b)}`;
+  const badScore=b=>{const r=[];
+    if(b===CHUNG(dayBr))r.push([4,'충','부딪히는 인연',`배우자궁 ${wa(dayBr,'과','와')} ${BR[b]}${jo(BRK[b],'이','가')} 정면으로 부딪혀요(충). 처음엔 끌림이 강하지만, 같이 살면 생활 리듬과 결정 방식이 계속 엇갈려요.`]);
+    if(b===WON(dayBr))r.push([3,'원진','미워하게 되는 인연',`배우자궁 ${wa(dayBr,'과','와')} 원진(怨嗔)이에요. 이유 없이 서운함이 쌓이고, 한번 상한 감정이 오래가요.`]);
+    if(HYUNG(dayBr,b))r.push([2.5,'형','상처 주는 인연',`배우자궁 ${wa(dayBr,'과','와')} 형(刑)이 걸려요. 다툴 때 말이 선을 넘기 쉽고, 그 말이 오래 남아요.`]);
+    if(b===HAE(dayBr))r.push([2,'해','속으로 지치는 인연',`배우자궁 ${wa(dayBr,'과','와')} 해(害)예요. 겉으론 잘 지내도 혼자만 맞춰 주는 느낌이 쌓여요.`]);
+    if(b===PA(dayBr))r.push([1.5,'파','계획이 깨지는 인연',`배우자궁 ${wa(dayBr,'과','와')} 파(破)예요. 약속이나 계획이 자꾸 틀어지고, 함께 세운 목표가 흐지부지되기 쉬워요.`]);
+    if(b===CHUNG(yb))r.push([2,'','',`내 띠(${DDI[yb]}띠)와 충이라 양가 분위기와 집안 문화가 부딪혀요.`]);
+    if(b===WON(yb))r.push([1.5,'','',`내 띠(${DDI[yb]}띠)와 원진이라 가족 모임 때마다 묘한 신경전이 생겨요.`]);
+    if(b===CHUNG(mBr))r.push([1.5,'','',`월지 ${wa(mBr,'과','와')} 충해서 일하는 방식, 돈 쓰는 습관, 생활 패턴이 안 맞아요.`]);
+    if(tBr!=null&&b===CHUNG(tBr))r.push([1,'','',`시지 ${wa(tBr,'과','와')} 충해서 자녀 계획이나 노후에 그리는 모습이 서로 달라요.`]);
+    if(BREL[b]===killEl)r.push([1.5,'','',`${EL[killEl]}(${ELH[killEl]}) 기운의 띠라, 내 배우자 기운인 ${EL[spouseEl]}${jo(EL[spouseEl],'을','를')} 눌러요.`]);
+    if(b===HAP(dayBr)||b===pb)return null;
+    const s=r.reduce((a,x)=>a+x[0],0);return s>=2.5?{b,s,r}:null};
+  const TIP={충:'큰 결정은 한 박자 늦추고, 생활 규칙을 미리 같이 정하세요.',원진:'서운한 건 그날 바로, 짧게 말하세요. 묵히면 커져요.',형:'싸울 때 절대 하지 않을 말을 미리 정해 두세요.',해:'역할과 돈 문제를 처음부터 분명하게 나누세요.',파:'중요한 약속은 글로 남기고 같이 확인하세요.'};
+  const bads=[...Array(12).keys()].map(badScore).filter(Boolean).sort((a,b)=>b.s-a.s).slice(0,rel==='S'?3:2).map(x=>{
+    const main=x.r.find(r=>r[1])||[0,'','엇갈리는 인연'];
+    const gs=gapAll(x.b).sort((a,c)=>Math.abs(a)-Math.abs(c));
+    return{...x,main,gap:gs.length?gapStr(gs[0]):'',risk:Math.min(96,45+Math.round(x.s*7))}});
   $('#result').innerHTML=`
   <section class="c reveal"><div class="thread"></div>
     <h2>${name}님의 배우자궁에<br>전부 나와 있어요</h2>
@@ -437,7 +513,7 @@ function run(e){
         <dt>키</dt><dd>${ht}cm 안팎</dd>
         <dt>체형</dt><dd>${BODY[dayBr][0]} 체형</dd>
         <dt>첫인상</dt><dd>${sp[2]}</dd>
-        <dt>직업군</dt><dd>${JOB[spouseEl][strong]}</dd>
+        <dt>직업군</dt><dd>${JOB[spouseEl][(sStem%2)*5+md(mBr+(tBr??P.year[1])+strong,5)]} · ${WSTYLE[placeEl]}</dd>
         <dt>음주</dt><dd>${DRINK[drinkLv]}</dd>
         <dt>성격</dt><dd>${sp[1]}</dd>
         <dt>다정함</dt><dd class="stars">${st()}</dd>
@@ -456,28 +532,53 @@ function run(e){
       <div class="cal">${cal}</div>
       <div class="legend"><span><i style="background:#2a1b25"></i>${T.lg[0]}</span><span><i style="background:var(--pink)"></i>${T.lg[1]}</span><span><i style="background:#1d3328"></i>${T.lg[2]}</span></div>
       <dl class="kv" style="margin-top:18px">
-        <dt>${T.k1}</dt><dd>${spot.t.full} 근처 ${pr.place}</dd>
+        <dt>${T.k1}</dt><dd>${spot.t.full} 근처 ${PERS[placeEl].place}</dd>
         <dt>시간대</dt><dd>${mm}월 ${md0}일 토요일 ${mh} 무렵</dd>
         <dt>일진</dt><dd>${gz(mdP)}일${mdP[1]===HAP(dayBr)?` · 배우자궁 ${BR[dayBr]}${jo(BRK[dayBr],'과','와')} 합`:se(mdP[0])===spouseEl?` · 배우자 오행 ${EL[spouseEl]}의 날`:''}</dd>
         <dt>${T.k3}</dt><dd class="quote">${T.line}</dd>
       </dl>
       <div class="map">${miniMap(home,spot)}</div>
-      <p class="note">배우자 오행 ${EL[spouseEl]}(${ELH[spouseEl]})${jo(EL[spouseEl],'은','는')} ${DIRN[spouseEl]}을 뜻해요. ${spot.km?`${home.n}에서 ${DIRN[spouseEl]}으로 약 ${spot.km}km 떨어진 <b>${spot.t.full}</b>에 그 사람의 기운이 머물러요.`:DIRB[spouseEl]==null?`멀리 가지 않아도 돼요. ${home.full} 안에 그 사람의 기운이 머물러요.`:`${DIRN[spouseEl]}으로는 가까운 동네가 없어서, ${home.full} 안 ${DIRN[spouseEl]} 끝자락에 그 사람의 기운이 머물러요.`}</p>
-      <div class="links"><a href="https://map.naver.com/p/search/${encodeURIComponent(spot.t.full+' '+KW[spouseEl])}" target="_blank" rel="noopener">네이버 지도에서 ${KW[spouseEl]} 보기</a><a href="https://map.kakao.com/link/search/${encodeURIComponent(spot.t.full+' '+KW[spouseEl])}" target="_blank" rel="noopener">카카오맵에서 보기</a></div>
+      <p class="note">배우자 오행 ${EL[spouseEl]}(${ELH[spouseEl]})${jo(EL[spouseEl],'은','는')} ${DIRN[spouseEl]}을 뜻해요. 장소 종류(${KW[placeEl]})는 ${P.time?'시주':'월주'} 천간 오행 ${EL[placeEl]}로 봤어요. ${spot.km?`${home.n}에서 ${DIRN[spouseEl]}으로 약 ${spot.km}km 떨어진 <b>${spot.t.full}</b>에 그 사람의 기운이 머물러요.`:DIRB[spouseEl]==null?`멀리 가지 않아도 돼요. ${home.full} 안에 그 사람의 기운이 머물러요.`:`${DIRN[spouseEl]}으로는 가까운 동네가 없어서, ${home.full} 안 ${DIRN[spouseEl]} 끝자락에 그 사람의 기운이 머물러요.`}</p>
+      <div class="links"><a href="https://map.naver.com/p/search/${encodeURIComponent(spot.t.full+' '+KW[placeEl])}" target="_blank" rel="noopener">네이버 지도에서 ${KW[placeEl]} 보기</a><a href="https://map.kakao.com/link/search/${encodeURIComponent(spot.t.full+' '+KW[placeEl])}" target="_blank" rel="noopener">카카오맵에서 보기</a></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2 class="c">${rel==='S'?'둘의 연애 이야기':rel==='D'?'둘이 걸어갈 길':'둘의 일상 사주'}</h2>
+    <div class="card">
+      <dl class="kv">
+        ${period?`<dt>${rel==='S'?'연애 기간':'남은 시간'}</dt><dd>${period}</dd>`:''}
+        <dt>관계</dt><dd>${relTxt} ${ddiTxt}</dd>
+        <dt>연락</dt><dd>${contact}</dd>
+        <dt>데이트</dt><dd>${course.join(' · ')}</dd>
+        <dt>여행지</dt><dd>${TRIP[spouseEl][P.month[1]%2][0]} · ${TRIP[spouseEl][P.month[1]%2][1]}</dd>
+        <dt>다툴 때</dt><dd>${FIGHT[killEl]}</dd>
+        <dt>화해법</dt><dd>${MAKEUP[(dm+4)%5]}${moEl!==(dm+4)%5?`, 그래도 안 풀리면 ${MAKEUP[moEl]}`:''}</dd>
+      </dl>
+      <ol class="tl">${tl.map((x,i)=>`<li class="${i===tl.length-1?'end':''}"><b>${fmt(x[0])}</b><span>${x[1]}</span></li>`).join('')}</ol>
+      <p class="note">날짜는 각 시기 안에서 일진이 배우자궁과 가장 잘 맞는 날로 골랐어요. 여행지는 배우자 오행, 다툼은 배우자 기운을 누르는 오행, 화해법은 나를 돕는 오행(인성)으로 봤어요.</p>
     </div>
   </section>
 
   <section class="reveal">
     <h2 class="c" style="color:var(--red)">${T.h5}</h2>
     <p class="c lead">${T.l5}</p>
-    <div class="avoid">${warn.map(a=>`<div class="card"><h3>${a[0]}</h3><p><b>${a[1]}</b><br>${a[2]}</p></div>`).join('')}</div>
+    ${rel!=='S'?`<div class="avoid">${warn.map(a=>`<div class="card"><h3>${a[0]}</h3><p><b>${a[1]}</b><br>${a[2]}</p></div>`).join('')}</div>
+    <h3 class="c" style="margin:28px 0 12px;font-size:18px">상대가 이 띠라면 더 신경 써 주세요</h3>`:''}
+    <div class="bad">${bads.map(x=>`<div class="card">
+      <h3>${DDI[x.b]}띠 · ${x.main[2]}</h3>
+      <p class="meta">${BR[x.b]}(${BRK[x.b]}) ${EL[BREL[x.b]]}${x.gap?` · 나와 ${x.gap}`:''}${x.main[1]?` · 배우자궁과 ${x.main[1]}`:''}</p>
+      <div class="risk"><span>궁합 위험도</span><i><em style="width:${x.risk}%"></em></i><b>${x.risk}%</b></div>
+      <ul>${x.r.map(r=>`<li>${r[3]}</li>`).join('')}<li>특히 ${BADT[BREL[x.b]]} 모습이 보이면 더 조심하세요.</li></ul>
+      <p class="tip">${rel==='S'?'이미 끌린다면':'이 띠와 함께라면'}: ${TIP[x.main[1]]||'서로의 속도를 존중하고, 중요한 건 미루지 말고 대화하세요.'}</p>
+    </div>`).join('')}</div>
     <button class="btn again" type="button" id="again">다시 입력하기</button>
   </section>`;
   $('#result').style.display='block';
   chart($('#fig'),scores,years,peak,T.peak);
   $('#again').onclick=()=>{window.scrollTo({top:0,behavior:'smooth'})};
   const age=(cy-y)+gap;
-  cur={px,age,vibe:VIBE[spouseEl],face:FACE[sStem],build:BUILD[dayBr],outfit:OUTFIT[spouseEl],ht};
+  cur={px,age,vibe:VIBE[spouseEl],face:FACE[sStem],build:BUILD[dayBr],outfit:OUTFIT[moEl],ht};
   try{$('#gk').value=localStorage.getItem('gk')||'';$('#gm').value=localStorage.getItem('gm')||$('#gm').value}catch(_){}
   if(!$('#gk').value)$('#keybox').open=true;
   $('#gen').onclick=genFace;
