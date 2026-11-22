@@ -185,6 +185,24 @@ function miniMap(home,spot){
   ${same?'':lab(tx,ty,spot.t.n,'#f07fae',ty>hy?20:-14)}
   <text x="${W-14}" y="20" text-anchor="end" font-size="12" fill="#a8969f">↑ 북</text></svg>`;
 }
+const STEMP=[
+['곧게 뻗는 큰 나무 같은','책임감이 강하고 앞장서는, 듬직한 리더형','반듯하고 믿음직함','"제가 들어 드릴게요, 무거워 보여서요."'],
+['덩굴처럼 부드러운','다정하고 섬세해서 작은 것까지 기억해 주는 사람','부드럽고 다정함','"이거 좋아하실 것 같아서요."'],
+['한낮의 태양 같은','밝고 솔직해서 어디서나 분위기를 띄우는 사람','웃는 얼굴이 먼저 기억남','"혹시 혼자 오셨어요?"'],
+['촛불처럼 은은한','조용하지만 내 사람에겐 따뜻하게 마음을 쓰는 사람','차분한데 눈빛이 따뜻함','"추우시면 이거 쓰세요."'],
+['큰 산 같은','말보다 행동으로 보여 주는, 기대어 쉬기 좋은 사람','듬직하고 편안함','"자주 오시죠? 늘 그 자리에 계시던데."'],
+['너른 들판 같은','세심하게 챙기고 생활력이 강한 사람','수수하고 친근함','"여기 메뉴 다 맛있어요. 이거 추천해요."'],
+['단단한 바위 같은','결단력 있고 의리가 강한, 한번 정하면 끝까지 가는 사람','깔끔하고 살짝 차가움','"그거 제가 도와드릴까요?"'],
+['잘 다듬은 보석 같은','감각이 좋고 자기 관리가 철저한 사람','세련되고 깔끔함','"그 펜 어디서 사셨어요? 예쁘네요."'],
+['큰 강물 같은','포용력이 크고 대화가 끊이지 않는 사람','여유롭고 시원시원함','"여기 노을 진짜 예쁘죠."'],
+['봄비 같은','생각이 깊고 공감을 잘하는, 볼수록 궁금한 사람','눈빛이 깊고 신비로움','"이 노래, 저도 좋아하는데요."']];
+const BODY=[['아담하고 날렵한',-2],['단단하고 다부진',0],['키가 크고 시원시원한',5],['가늘고 길쭉한',3],['어깨가 넓고 듬직한',3],['균형 잡힌 탄탄한',1],['활동적이고 건강한',2],['부드럽고 포근한',-1],['슬림하고 탄탄한',2],['아담하고 반듯한',-1],['골격이 크고 든든한',4],['유연하고 부드러운',0]];
+const JOB=[['교육·출판','콘텐츠 기획·방송작가','조경·건축 설계','의료·제약','상담·심리'],
+['광고·브랜딩','방송·공연','외식·창업','디자인·패션','마케팅·홍보'],
+['공공기관·행정','부동산·인테리어','공무원·HR','회계·세무','물류·유통'],
+['법조·노무','전기·전자 엔지니어','금융·증권','반도체·기계','IT 보안·데이터'],
+['연구원·학계','게임·IT 서비스','무역·해운','개발자·소프트웨어','여행·항공']];
+const DRINK=['거의 안 마심','분위기만 즐기는 정도','가볍게 즐기는 정도','술자리를 좋아하는 편','소문난 주당'];
 const DDI=['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
 const KILLT=['고집이 세고 자기 방식만 밀어붙이는','감정 기복이 크고 즉흥적인','변화를 싫어하고 고집스러운','날카롭고 지적이 잦은','속을 알 수 없고 우유부단한'];
 const KILLC=['서로 고집을 부리기 쉬워요. 결론보다 상대 이야기를 먼저 들어 주세요.','말이 앞서기 쉬워요. 감정이 올라오면 하루 미뤘다가 이야기하세요.','관계가 지루해지기 쉬워요. 새로운 데이트를 계획해 보세요.','말이 날카로워지기 쉬워요. 지적 대신 부탁으로 말해 보세요.','속마음을 숨기기 쉬워요. 먼저 솔직하게 털어놓으세요.'];
@@ -234,6 +252,9 @@ function chart(el,scores,years,peak,lab){
   const ro=new ResizeObserver(draw);ro.observe(s);
 }
 
+const FACE=['strong straight eyebrows, defined jawline, steady confident gaze','soft round eyes, gentle smile, delicate features','bright wide smile, lively sparkling eyes, warm skin tone','calm soft eyes, subtle warm smile, refined features','broad face, kind thick eyebrows, relaxed reassuring expression','friendly round face, natural unpretentious look, soft cheeks','sharp clean features, high nose bridge, cool composed expression','elegant fine features, clear fair skin, neat polished look','open relaxed face, easygoing grin, wavy hair','deep thoughtful eyes, slightly mysterious soft expression'];
+const BUILD=['petite and lean','solid and sturdy','tall with an open, airy presence','slender and long-limbed','broad-shouldered and dependable','balanced athletic','healthy active','soft and cozy','slim but toned','compact and neat','big-framed and strong','supple and graceful'];
+const OUTFIT=['a cotton shirt with a cardigan','a casual knit and bright accessories','a comfortable sweater','a crisp white shirt and slacks','a dark turtleneck and coat'];
 const VIBE=['gentle and calm, neat hair, warm eyes','bright and cheerful, big warm smile','reliable and kind, soft round features','sharp and clean-cut, composed expression','deep thoughtful eyes, slightly mysterious'];
 let cur=null;
 async function genFace(){
@@ -242,7 +263,7 @@ async function genFace(){
   if(!key){$('#keybox').open=true;err.textContent='Gemini API 키를 먼저 넣어 주세요.';return}
   try{localStorage.setItem('gk',key);localStorage.setItem('gm',model)}catch(_){}
   const who=cur.px==='M'?'man':'woman',dec=Math.max(20,Math.round(cur.age));
-  const prompt=`Photorealistic portrait photo of a fictional Korean ${who}, about ${dec} years old, ${cur.vibe}, ${cur.body.includes('키') ? 'tall' : 'natural'} build, wearing a simple dark jacket, soft studio light, light grey background, upper body, facing the camera with a gentle smile, 85mm lens, shallow depth of field. Not a real person or celebrity. No text.`;
+  const prompt=`Photorealistic portrait photo of a fictional Korean ${who}, about ${dec} years old, around ${cur.ht}cm tall, ${cur.build} build. Face: ${cur.face}. Overall vibe: ${cur.vibe}. Wearing ${cur.outfit}. Soft natural light, simple light background, upper body, looking at the camera, 85mm lens, shallow depth of field. Not a real person or celebrity. No text.`;
   box.classList.add('load');$('#gen').disabled=true;
   try{
     const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},
@@ -328,15 +349,18 @@ function run(e){
   // 배우자
   const pol=P.day[0]%2,sStem=spouseEl*2+(1-pol);
   const pr=PERS[spouseEl];
-  const mb=[sStem%2===0?'E':'I',...pr.mb];
+  const sp=STEMP[sStem];
+  const strong=cnt.indexOf(Math.max(...cnt));
+  const mb=[sStem%2===0?'E':'I',[0,1,4].includes(spouseEl)?'N':'S',[3,4].includes(BREL[dayBr])?'T':'F',cnt[2]+cnt[3]>=3?'J':'P'];
+  const ds=cnt[4]-1+([0,11].includes(dayBr)?1:0)+(spouseEl===4||spouseEl===1?1:0)-(spouseEl===2?1:0);const drinkLv=ds<=0?0:ds===1?1:ds===2?2:ds<=4?3:4;
   const gapFor=bs=>{let g=null;for(const t of [0,1,-1,2,-2,3,-3,4,-4,5,-5,6,7,8]){if(md(sy-t-4,12)===bs){g=t;break}}return g};
   const gapStr=g=>g===0?'동갑':g>0?`${g}살 연상`:`${-g}살 연하`;
   const cands=[HAP(P.year[1]),(P.year[1]+4)%12,(P.year[1]+8)%12].map(b=>[b,gapFor(b)]).filter(c=>c[1]!==null);
   cands.sort((a,b)=>Math.abs(a[1])-Math.abs(b[1])||b[1]-a[1]);
   const [pb,gap]=cands[0];
   const gapTxt=`${gapStr(gap)} · ${DDI[pb]}띠`;
-  const ht=(px==='M'?173:160)+[6,3,0,4,2][spouseEl]+(cnt[spouseEl]>=2?1:0);
-  const STAR=[[5,4,3],[4,3,5],[4,5,3],[3,5,3],[4,4,5]][spouseEl];let si=0;
+  const ht=(px==='M'?174:161)+BODY[dayBr][1]+(spouseEl===0?2:0);
+  const c5=v=>Math.min(5,v);const STAR=[c5(3+(sStem%2)+(cnt[0]+cnt[1]>=3?1:0)),c5(3+([2,3].includes(spouseEl)?1:0)+(cnt[2]>=2?1:0)),c5(3+([1,4].includes(spouseEl)?1:0)+(cnt[1]+cnt[4]>=3?1:0))];let si=0;
   const st=()=>{const n=STAR[si++];return'★'.repeat(n)+'☆'.repeat(5-n)};
   const inChart=[P.time,P.month,P.year].filter(Boolean).map(q=>q[1]);
   const match=Math.min(99,80+5*Math.min(cnt[spouseEl],2)+(inChart.includes(HAP(dayBr))?5:0)+(inChart.includes(CHUNG(dayBr))?0:4));
@@ -352,7 +376,7 @@ function run(e){
 
   const T={
     S:{h2:'결혼운은 언제 열릴까?',big:`${wy}년 ${wm}월 ${wd}일`,lead:`만 ${wy-y}살 무렵의 토요일, 결혼운이 가장 높은 해의 길한 달이에요`,peak:'결혼운 최고',end:'그 전까진 타이밍이 아니었을 뿐이에요.',
-       h3:'그 사람은 어떤 사람일까?',h3s:'',h4:'인연이 오는 날',h4s:'그 사람은 언제 나타날까?',lg:['기운이 돌기 시작','만남운 최고','약속 잡기 좋은 날'],k1:'만나는 곳',k3:'첫마디',line:pr.line,
+       h3:'그 사람은 어떤 사람일까?',h3s:'',h4:'인연이 오는 날',h4s:'그 사람은 언제 나타날까?',lg:['기운이 돌기 시작','만남운 최고','약속 잡기 좋은 날'],k1:'만나는 곳',k3:'첫마디',line:sp[3],
        h5:'단, 피해야 할<br>사람들도 있어요',l5:`${EL[killEl]}(${ELH[killEl]}) 기운이 강한 사람, 특히 ${KILLT[killEl]} 사람은 ${name}님의 배우자 기운을 눌러요`},
     D:{h2:'지금 인연과 결혼한다면?',big:`${wy}년 ${wm}월 ${wd}일`,lead:`만 ${wy-y}살 무렵, 지금 관계가 이어진다면 이날이 가장 좋아요`,peak:'결혼운 최고',end:'지금 만나는 사람과 이 흐름을 같이 타 보세요.',
        h3:'사주 속 인연의 모습',h3s:'지금 그 사람과 얼마나 닮았는지 비교해 보세요',h4:'관계가 한 걸음 나아가는 날',h4s:'고백, 기념일, 중요한 대화를 하기 좋은 때',lg:['마음이 무르익는 때','애정운 최고','데이트하기 좋은 날'],k1:'추천 데이트',k3:'그날 꺼낼 말',line:'"우리 다음엔 어디 갈까? 내년 얘기도 해 보자."',
@@ -408,14 +432,14 @@ function run(e){
       <p class="c big" style="margin:0 0 14px">${match}점</p>
       <div class="mbti">${mb.map((c,i)=>`<div><b>${c}</b><small>${['외향/내향','감각/직관','사고/감정','판단/인식'][i]}</small></div>`).join('')}</div>
       <dl class="kv">
-        <dt>일간</dt><dd><b style="color:var(${ELC[spouseEl]})">${ST[sStem]}${EL[spouseEl]}</b> · ${pr.k} 기운</dd>
+        <dt>일간</dt><dd><b style="color:var(${ELC[spouseEl]})">${ST[sStem]}${EL[spouseEl]}</b> · ${sp[0]} 기운</dd>
         <dt>나이 차</dt><dd>${gapTxt}</dd>
         <dt>키</dt><dd>${ht}cm 안팎</dd>
-        <dt>체형</dt><dd>${pr.body} 체형</dd>
-        <dt>첫인상</dt><dd>${pr.first}</dd>
-        <dt>직업군</dt><dd>${pr.job}</dd>
-        <dt>음주</dt><dd>${pr.drink}</dd>
-        <dt>성격</dt><dd>${pr.desc}</dd>
+        <dt>체형</dt><dd>${BODY[dayBr][0]} 체형</dd>
+        <dt>첫인상</dt><dd>${sp[2]}</dd>
+        <dt>직업군</dt><dd>${JOB[spouseEl][strong]}</dd>
+        <dt>음주</dt><dd>${DRINK[drinkLv]}</dd>
+        <dt>성격</dt><dd>${sp[1]}</dd>
         <dt>다정함</dt><dd class="stars">${st()}</dd>
         <dt>성실함</dt><dd class="stars">${st()}</dd>
         <dt>유머</dt><dd class="stars">${st()}</dd>
@@ -453,7 +477,7 @@ function run(e){
   chart($('#fig'),scores,years,peak,T.peak);
   $('#again').onclick=()=>{window.scrollTo({top:0,behavior:'smooth'})};
   const age=(cy-y)+gap;
-  cur={px,age,vibe:VIBE[spouseEl],body:pr.body};
+  cur={px,age,vibe:VIBE[spouseEl],face:FACE[sStem],build:BUILD[dayBr],outfit:OUTFIT[spouseEl],ht};
   try{$('#gk').value=localStorage.getItem('gk')||'';$('#gm').value=localStorage.getItem('gm')||$('#gm').value}catch(_){}
   if(!$('#gk').value)$('#keybox').open=true;
   $('#gen').onclick=genFace;
